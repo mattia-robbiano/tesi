@@ -1,0 +1,12 @@
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Tensor network representation of the sampling probabilities $p(b_1b_2\ldots b_n)$. Each node corresponds to a local projector $\Pi _{b_i}$, and the open legs represent the outcomes $b_i$.\relax }}{6}{figure.caption.4}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Tensor network representation of the first term in the MMD expression. The kernel matrix $ K $ acts on the output space indexed by $ x $ and $ y $, and can be realized as a kernel MPO.\relax }}{7}{figure.caption.5}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces The data bitstrings are represented as computational MPS, and the hyperindex allows efficient summation over all possible bitstrings.\relax }}{7}{figure.caption.6}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Tensor network representation of the mixed term in the MMD expression. The kernel matrix $ K $ acts on the output space indexed by $ x $ and $ y $, and can be realized as a kernel MPO.\relax }}{8}{figure.caption.7}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces We contract the model (in blue) and the data (green) with the MPO representing the loss function (organge). - figure to bi fixed, I didn't noticed the legend was not rendered\relax }}{8}{figure.caption.9}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Training results and corresponding generated samples for MMD-based training.\relax }}{11}{figure.caption.11}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Training results and corresponding generated samples for DKL-based training.\relax }}{12}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Variance of the loss function at random initialization as a function of the number of qubits, for different bond dimensions. The exponential decay suggests the presence of a barren plateau.\relax }}{13}{figure.caption.13}%

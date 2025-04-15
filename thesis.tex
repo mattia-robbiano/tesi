@@ -1,0 +1,133 @@
+\documentclass[12pt,a4paper,openright,oneside]{book}	%%One sided
+
+% PACKAGES FOR EXAMPLES
+\usepackage{lipsum}
+\usepackage{comment}
+
+% PAGE MARGINS
+\usepackage{geometry}
+\geometry{a4paper,portrait,left=25mm,right=25mm,top=25mm,bottom=25mm}
+
+% HEADERS AND FOOTERS
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % Clear default header and footer
+\lhead{\leftmark} % Left header
+\rfoot{\thepage} % Right footer
+\fancypagestyle{plain}{ % Plain style for chapter start pages
+  \fancyhf{}
+  \rfoot{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% CLEAR EMPTY DOUBLE PAGE
+\let\origdoublepage\cleardoublepage
+\newcommand{\clearemptydoublepage}{%
+  \clearpage
+  {\pagestyle{empty}\origdoublepage}%
+}
+
+% PAGE ROTATION
+\usepackage{lscape}
+
+% HYPERTEXT AND PDF SETTINGS
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=black,
+  pdfauthor={AuthorName},
+  pdftitle={shortTitle},
+  pdfsubject={subject},
+  pdfkeywords={keyword1, keyword2}
+}
+
+% FONTS AND SYMBOLS
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{braket}
+
+% LANGUAGE SETTINGS
+\usepackage[italian,english]{babel}
+
+% FIGURES
+\usepackage[export]{adjustbox}
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+% TABLES
+\usepackage{multirow}
+\usepackage{booktabs}
+
+% CAPTIONS
+\usepackage{caption}
+
+% BIBLIOGRAPHY
+\usepackage[babel]{csquotes}
+
+% CODE LISTINGS
+\usepackage{listings}
+
+%% HYPHENATION
+\hyphenation{te-si pip-po paperino}
+
+% BEGIN DOCUMENT
+\begin{document}
+
+% HEAD  OF THE DOCUMENT
+\frontmatter
+
+% FRONT PAGE
+\input{head/frontPage.tex}
+\clearemptydoublepage
+
+%DEDICATION (the initial quote)
+\input{head/dedication}
+\clearemptydoublepage
+
+%ABSTRACT
+\input{head/abstract}
+\input{head/abstractITA}
+\clearemptydoublepage
+
+%INDEXES
+\tableofcontents
+\clearemptydoublepage
+
+% BODY OF THE DOCUMENT
+\mainmatter
+
+% INTRODUCTION
+\input{body/introduction.tex}
+\clearemptydoublepage
+
+% CHAPTERS
+\input{body/chapter2.tex}
+\clearemptydoublepage
+\input{body/chapter3.tex}
+\clearemptydoublepage
+
+% TAIL OF THE DOCUMENT
+\backmatter
+
+% list of figures
+\listoffigures
+\clearemptydoublepage
+
+%list of tables
+\listoftables
+\clearemptydoublepage
+
+%bibliography
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliography{bibliography/thesis}
+\bibliographystyle{ieeetr}
+\clearemptydoublepage
+
+\end{document}
