@@ -1,15 +1,65 @@
-\chapter{The basics}
+\chapter{Concepts in Quantum Information}
+\section{Basics}
+The mathematical framework of quantum mechanics relies on the notion of a Hilbert space, denoted by $\mathcal{H}$. This is a complex vector space equipped with an inner product and is complete with respect to the norm it defines. Physical states of a quantum system are represented by unit vectors in this space, typically expressed in Dirac notation as kets, $\ket{\psi}$. The dual of these vectors, called bras $\bra{\psi}$, belong to the dual space and act as linear functionals on kets. The inner product between two states, $\braket{\psi}{\phi}$, gives a complex number and encodes probabilistic information about measurements.
 
-\section{Introduction to Quantum Computing}
+A basis $\{\ket{b_i}\}$ of $\mathcal{H}$ is said to be orthonormal if it satisfies $\braket{b_i}{b_j} = \delta_{ij}$. Any state $\ket{\psi} \in \mathcal{H}$ can be expanded in terms of such a basis:
+\begin{equation}
+    \ket{\psi} = \sum_i c_i \ket{b_i}, \quad \text{with } c_i = \braket{b_i}{\psi}
+\end{equation}
+where the coefficients $c_i$ are the components of the state in that basis. For physical states, normalization requires $\sum_i |c_i|^2 = 1$.
 
-\lipsum[1-2] 
-\cite{rudolph_generation_2022}
-\cite{schollwock_density-matrix_2011}
-\cite{mangini_low-variance_2024}
-\cite{rudolph_trainability_2024}
-\cite{collura_tensor_2024}
-\cite{garcia-perez_learning_2021}
+The time evolution of an isolated quantum system is governed by the time-dependent Schrödinger equation:
+\begin{equation}
+    i\hbar \frac{d}{dt} \ket{\psi(t)} = H \ket{\psi(t)}
+\end{equation}
+where $H$ is the Hamiltonian operator, representing the total energy of the system. If $H$ is independent of time, the equation admits a unitary solution:
+\begin{equation}
+    \ket{\psi(t)} = U(t - t_0)\ket{\psi(t_0)} = e^{-iH(t - t_0)/\hbar} \ket{\psi(t_0)}
+\end{equation}
+This unitary evolution ensures that probabilities, given by inner products, are preserved over time.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Quantum Measurements}
+In quantum mechanics, physical quantities such as position, momentum, or energy are described by Hermitian operators called observables. The process of measurement is associated with a set of measurement operators $\{M_m\}$, which act on the state space and satisfy the completeness relation:
+\begin{equation}
+    \sum_m M_m^\dagger M_m = \mathbb{1}
+\end{equation}
+Each index $m$ corresponds to a possible measurement outcome, and the probability of obtaining outcome $m$ when the system is in state $\ket{\psi}$ is given by:
+\begin{equation}
+    p(m) = \bra{\psi} M_m^\dagger M_m \ket{\psi}
+\end{equation}
+These probabilities sum to one and are invariant under global phase changes in the state.
 
+Following a measurement resulting in outcome $m$, the post-measurement state becomes:
+\begin{equation}
+    \ket{\psi_m} = \frac{M_m \ket{\psi}}{\sqrt{\bra{\psi} M_m^\dagger M_m \ket{\psi}}}
+\end{equation}
+This transformation, known as the collapse of the wavefunction, reflects the non-unitary nature of measurement in quantum theory.
+
+A particularly important case is that of projective measurements, where the measurement operators are orthogonal projectors: $M_m = P_m$ with $P_m P_{m'} = \delta_{mm'} P_m$. In this case, the observable $L$ being measured admits a spectral decomposition:
+\begin{equation}
+    L = \sum_m l_m P_m
+\end{equation}
+Here, $l_m$ are the eigenvalues of $L$, and each projector $P_m$ projects onto the eigenspace associated with $l_m$. The measurement statistics and state update rules become:
+\begin{equation}
+    p(m) = \bra{\psi} P_m \ket{\psi}, \quad
+    \ket{\psi} \xrightarrow{m} \ket{\psi_m} = \frac{P_m \ket{\psi}}{\sqrt{\bra{\psi} P_m \ket{\psi}}}
+\end{equation}
+
+An important implication is that quantum measurements cannot perfectly distinguish non-orthogonal states. For example, consider an orthonormal basis $\{\ket{b_1}, \ket{b_2}\}$ and two states $\ket{\psi_1} = \ket{b_1}$ and $\ket{\psi_2} = (\ket{b_1} + \ket{b_2})/\sqrt{2}$. Measuring an observable diagonal in this basis cannot definitively identify which state the system was in.
+
+Finally, the expectation value of an observable $L$ in the state $\ket{\psi}$ is given by:
+\begin{equation}
+    \langle L \rangle = \sum_m p(m) l_m = \bra{\psi} L \ket{\psi}
+\end{equation}
+This quantity represents the average result one would obtain over many identical measurements on identically prepared systems.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Multipartite Systems and Entanglement Structure}
+Quantum systems composed of multiple subsystems are described by the tensor product of their individual Hilbert spaces. Given two quantum systems $A$ and $B$ associated with Hilbert spaces $\mathcal{H}_A$ and $\mathcal{H}_B$, the joint system is characterized by the Hilbert space $\mathcal{H}_A \otimes \mathcal{H}_B$. A pure state $\ket{\Psi} \in \mathcal{H}_A \otimes \mathcal{H}_B$ is called a \emph{product state} if it can be decomposed as $\ket{\Psi} = \ket{\psi}_A \otimes \ket{\phi}_B$ for some $\ket{\psi}_A \in \mathcal{H}_A$ and $\ket{\phi}_B \in \mathcal{H}_B$. States that are not of this form are termed \emph{entangled}, and their reduced descriptions $\rho_A = \tr_B \ket{\Psi}\bra{\Psi}$ and $\rho_B = \tr_A \ket{\Psi}\bra{\Psi}$ do not determine the global state. For example, the Bell state $\ket{\Phi^+} = \frac{1}{\sqrt{2}}(\ket{00} + \ket{11})$ is maximally entangled: measurements on subsystem $A$ instantaneously determine the outcome probabilities on $B$, regardless of spatial separation. Observables on the joint system are typically of the form $O = O_A \otimes O_B$, and two observables $L_1$ and $L_2$ are \emph{compatible} if they commute, $[L_1, L_2] = 0$. Compatibility allows simultaneous diagonalization, while incompatibility enforces measurement trade-offs via uncertainty relations. This structure is essential for understanding phenomena such as nonlocal correlations, violation of Bell inequalities, and the operational limits of quantum protocols.
+
+\section{Reconstructing Quantum States: Principles of Tomography}
+Quantum state tomography is the experimental procedure aimed at inferring the density operator $\rho$ that best describes an unknown quantum system, based on statistical data gathered from repeated measurements. For a system described by a $d$-dimensional Hilbert space, the general mixed state is given by a Hermitian, positive semi-definite operator $\rho \in \mathcal{B}(\mathcal{H})$ satisfying $\tr(\rho) = 1$. Reconstructing $\rho$ requires a set of measurement observables $\{O_i\}$ such that their expectation values $\braket{O_i} = \tr(O_i \rho)$ allow determination of all degrees of freedom in $\rho$. A minimal informationally complete set consists of $d^2 - 1$ linearly independent observables (excluding the identity), making tomography computationally expensive for large systems. In practice, measurements are performed in various bases, and the resulting frequencies $f_i$ are used to estimate probabilities $p_i \approx \tr(M_i \rho)$, where $\{M_i\}$ are POVM elements. Then, numerical methods such as linear inversion, maximum likelihood estimation, or Bayesian inference are employed to reconstruct the density matrix. In multipartite settings, the complexity of tomography scales exponentially with the number of subsystems due to the explosion in state parameters, motivating the use of compressed sensing and tensor network techniques when the underlying state admits a low-complexity structure. Tomography not only enables state verification, but also serves as a foundational tool for validating quantum gates, benchmarking devices, and probing entanglement experimentally.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction to Tensor Network}
 
 \lipsum[1-2]
